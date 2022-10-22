@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef DEBUG
 #define DEBUG_LOG(msg) printf(msg);
 #else
