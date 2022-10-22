@@ -1,12 +1,12 @@
-### Introdução
+## Introdução
 
 Neste trabalho vamos implementar um sistema de sincronização entre threads que se assemelha a um sistema de controle de movimentação para um jogo digital, ou para o controle de robôs.
 
-### Objetivo
+## Objetivo
 
 Seu objetivo será criar um programa em C, com Pthreads, que deve criar um certo número de threads que seguirão, cada uma, um trajeto definido dentro de uma grade (como um tabuleiro representado por uma matriz NxN). Cada thread visitará um certo número de posições e deverá seguir certas regras no seu movimento.
 
-### O princípio de operação
+## O princípio de operação
 
 A especificação do tabuleiro, do número de threads e dos seus trajetos será fornecida através da entrada padrão, como linhas de texto. Cada thread representará uma entidade se movendo em um tabuleiro NxN, com certas restrições sobre o movimento. Ao entrar em uma posição da grade, cada thread deve passar um certo tempo ali (definido na especificação) antes de se mover para a próxima posição. Depois de ficar o tempo determinado na última posição do seu trajeto, cada thread deve terminar.
 
@@ -30,7 +30,7 @@ void passa_tempo(int tid, int decimos)
 
 O código apresentado para a função passa_tempo fará com que a thread seja suspensa pelo tempo indicado. Para todos os efeitos de sincronização, seria o mesmo que se ela estivesse executando qualquer tipo de operação computacionamente intensiva, porém sem ocupar a CPU durante esse período.
 
-### Especificação do problema
+## Especificação do problema
 
 O arquivo de entrada seguirá o seguinte formato
 
@@ -56,7 +56,7 @@ O formato da entrada será garantido sem erros (não é preciso incluir código 
 
 Um exemplo de arquivo de entrada será apresentado ao final desta página.
 
-### Movimento pelo trajeto
+## Movimento pelo trajeto
 
 Cada thread, ao ser criada, deve recever seu identificador, o identificador do seu grupo e o trajeto a ser seguido. Ela deve então se mover pelo trajeto, pelas posições (x,y) indicadas. Além da garantia já fornecida de que todos os movimentos na descrição do trajeto são válidos, a única regra a ser observada é:
 
@@ -68,13 +68,13 @@ Para simplificar, se isso for importante na sua implementação, pode-se assumir
 
 Cada thread do pool, ao ser criada, deve receber como parâmetro um identificador (inteiro, iniciando em 1 e incrementado a cada nova thread criada) e executar a seguinte sequência de operações (expressa em C-pseudo-código):
 
-### Detalhamento da sincronização
+## Detalhamento da sincronização
 
 Em síntese, o objetivo principal deste exercício, do ponto de vista da disciplina, é a criação e controle de um grupo de threads, que deverão acessar cada posição da grade disponível de forma sincronizada, segundo a regra de movimentação apresentada. Essa sincronização deve ser implementada usando variáveis de exclusão mútua e de condição (uma solução com semáforos nesse caso seria mais complexa).
 
 Uma possível solução poderia usar operações denominadas entra/sai que receberiam como parâmetros as coordenadas de uma posição. No seu movimento de P1 para P2, bastaria a uma thread executar a sequência **entra(P2.x,P2.y); sai(P1.x,p1.y);** sendo que as primitivas de sincronização estariam dento das funções **entra()** e **sai()**.
 
-### Sobre a execução do programa:
+## Sobre a execução do programa:
 
 Seu programa deve ler da entrada padrão e escrever na saída padrão. Ele não deve receber parâmetros de linha de comando. Não é preciso testar por erros na entrada, mas seu programa deve funcionar com qualquer combinação válida.
 
@@ -84,7 +84,7 @@ O código deve usar apenas C padrão, sem bibliotecas além das consideradas pad
 
 O material desenvolvido por você deve executar sem erros nas [máquinas linux do laboratório de graduação](https://www.crc.dcc.ufmg.br/infraestrutura/laboratorios/linux). A correção será feita naquelas máquinas e programas que não compilarem, não seguirem as determinações quanto ao formato da entrada e da saída, ou apresentarem erros durante a execução, serão desconsiderados.
 
-### O que deve ser entregue:
+## O que deve ser entregue:
 
 Você deve entregar um arquivo .zip contendo os seguintes elementos:
 
