@@ -1,0 +1,17 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "files.associations": {
+        "*.c": "c",
+        "input.h": "c",
+        "grid.h": "c",
+        "supervisor.h": "c",
+        "core.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/mnt/c/Products/moving-threads",
+            "binaryPath": "/mnt/c/Products/moving-threads/ex1-debug",
+            "binaryArgs": []
+        }
+    ]
+}
