@@ -1,8 +1,8 @@
 #include "input.h"
 
-FILE *open_file(const char *filename)
+FILE *open_file(const char *filename, const char *mode)
 {
-    FILE *file_ptr = fopen(filename, "r");
+    FILE *file_ptr = fopen(filename, mode);
 
     if (!file_ptr)
     {
