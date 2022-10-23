@@ -5,7 +5,8 @@
         "input.h": "c",
         "grid.h": "c",
         "supervisor.h": "c",
-        "core.h": "c"
+        "core.h": "c",
+        "agent.h": "c"
     },
     "makefile.launchConfigurations": [
         {

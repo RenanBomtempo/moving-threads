@@ -18,7 +18,7 @@ void print_grid(grid_t *grid)
     {
         for (int j = 0; j < grid->length; j++)
         {
-            printf("| %d ", grid->positions[i * j]);
+            printf("| %d ", grid->cells[i * j]);
         }
         printf("|\n");
     }

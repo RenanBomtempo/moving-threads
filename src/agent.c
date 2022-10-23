@@ -12,13 +12,13 @@ void passa_tempo(int tid, int decimos)
     printf("PTb(%d,%d)\n", tid, decimos);
 }
 
-void print_agent(agent_t *a)
+void print_agent(agent_t a)
 {
 #ifdef DEBUG
-    printf("Agent [%d:%d]:\n\tPath length %d)\n\tPath:\n", a->id, a->group_id, a->path_length);
-    for (int i = 0; i < a->path_length; i++)
+    printf("Agent [%d:%d]:\n\tPath length: %d\n\tPath:\n", a.id, a.group_id, a.path_length);
+    for (int i = 0; i < a.path_length; i++)
     {
-        printf("\t\t(%d, %d, %d s)\n", a->path[i].position.x, a->path[i].position.y, a->path[i].sleep_time);
+        printf("\t\t(%d, %d, %d s)\n", a.path[i].position.x, a.path[i].position.y, a.path[i].sleep_time);
     }
 #endif
 }

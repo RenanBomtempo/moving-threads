@@ -7,7 +7,6 @@
 #include "core.h"
 #include "position.h"
 
-
 typedef struct step_t
 {
     int sleep_time;
@@ -19,11 +18,12 @@ typedef struct agent_t
     int id;
     int group_id;
     int path_length;
+    int current_step;
     position_t position;
     step_t path[MAX_PATH_LENGTH];
 } agent_t;
 
-void print_agent(agent_t *a);
+void print_agent(agent_t a);
 
 void passa_tempo(int tid, int decimos);
 

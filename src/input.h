@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "core.h"
+#include "supervisor.h"
 #include "grid.h"
-#include "agent.h"
 
 #define READ_MODE "r"
 #define WRITE_MODE "w"
@@ -20,5 +20,7 @@ typedef struct Input
 FILE *open_file(const char *filename, const char *mode);
 
 void close_file(FILE *file);
+
+void input_processing(const char *filename, grid_t *grid, supervisor_t *supervisor);
 
 #endif

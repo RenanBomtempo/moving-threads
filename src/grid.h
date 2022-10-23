@@ -6,11 +6,10 @@
 #include "core.h"
 #include "position.h"
 
-
 typedef struct grid_t
 {
     int length; // Number of positions in each line/column of the grid
-    int positions[MAX_GRID_LENGTH * MAX_GRID_LENGTH];
+    int cells[MAX_GRID_LENGTH * MAX_GRID_LENGTH];
 } grid_t;
 
 void initialize_grid(grid_t *grid, int length);
