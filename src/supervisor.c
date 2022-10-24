@@ -3,13 +3,10 @@
 #include <pthread.h>
 #include <time.h>
 
-void enter_cell(grid_t *grid, agent_t *agent)
+void enter_cell(agent_t *agent, cell_t *cell_to_enter)
 {
-    step_t current_step = agent->path[agent->current_step_id];
-    cell_t *cell_to_enter = get_cell(grid, current_step.position);
-
     pthread_mutex_lock(&(cell_to_enter->mutex));
-    DEBUG_LOG("%d: Mutex acquired (%d, %d)\n", agent->id, current_step.position.x, current_step.position.y)
+    DEBUG_LOG("%d:\t Mutex acquired\n", agent->id)
     while (cell_to_enter->group_id != agent->group_id && cell_to_enter->group_id > 0)
     {
         DEBUG_LOG("%d:\t Waiting to enter\n", agent->id);
@@ -20,31 +17,24 @@ void enter_cell(grid_t *grid, agent_t *agent)
     if (cell_to_enter->agent_count == 1)
         cell_to_enter->group_id = agent->group_id;
 
-    pthread_cond_signal(&(cell_to_enter->occupied));
     pthread_mutex_unlock(&(cell_to_enter->mutex));
-
-    agent->position = current_step.position;
-    DEBUG_LOG("%d: Entered position (%d, %d)\n", agent->id, current_step.position.x, current_step.position.y)
+    pthread_cond_broadcast(&(cell_to_enter->occupied));
+    DEBUG_LOG("%d:\t Mutex released\n", agent->id)
 }
 
-void leave_cell(grid_t *grid, agent_t *agent)
+void leave_cell(agent_t *agent, cell_t *cell_to_leave)
 {
-    step_t current_step = agent->path[agent->current_step_id];
-    cell_t *cell_to_leave = get_cell(grid, current_step.position);
-
     pthread_mutex_lock(&(cell_to_leave->mutex));
-    DEBUG_LOG("%d: Mutex acquired (%d, %d)\n", agent->id, current_step.position.x, current_step.position.y)
+    DEBUG_LOG("%d:\t Mutex acquired\n", agent->id)
 
     cell_to_leave->agent_count--;
     if (cell_to_leave->agent_count == 0)
     {
         cell_to_leave->group_id = -1;
-        pthread_cond_signal(&(cell_to_leave->empty));
+        pthread_cond_broadcast(&(cell_to_leave->empty));
     }
     pthread_mutex_unlock(&(cell_to_leave->mutex));
-
-    agent->position = out_of_grid_position();
-    DEBUG_LOG("%d: Left position (%d, %d)\n", agent->id, current_step.position.x, current_step.position.y)
+    DEBUG_LOG("%d:\t Mutex released\n", agent->id)
 }
 
 void print_agents(supervisor_t *supervisor)
@@ -76,19 +66,30 @@ void terminate_agents(supervisor_t *supervisor)
 void *agent_run(void *arguments)
 {
     agent_t *agent = (agent_t *)arguments;
-    grid_t *grid = agent->grid;
-    DEBUG_LOG("%d: started succesfully!\n", agent->id);
+
+    DEBUG_LOG("%d: begin 0\n", agent->id);
+    step_t initial_step = agent->path[0];
+    enter_cell(agent, get_cell(agent->grid, initial_step.position));
+    passa_tempo(agent->id, initial_step.sleep_time);
+    agent->current_step_id++;
+    DEBUG_LOG("%d: finished 0\n", agent->id);
 
     while (agent->current_step_id < agent->path_length)
     {
-        DEBUG_LOG("%d: begin %d\n", agent->id, agent->current_step_id);
+        step_t current_step = agent->path[agent->current_step_id];
+        step_t previous_step = agent->path[agent->current_step_id - 1];
 
-        enter_cell(grid, agent);
-        passa_tempo(agent->id, agent->path[agent->current_step_id].sleep_time);
+        DEBUG_LOG("%d: begin step %d (%d, %d) -> (%d, %d)\n", agent->id, agent->current_step_id, previous_step.position.x, previous_step.position.y, current_step.position.x, current_step.position.y);
 
-        // Leave only if this is not the last step
-        if (agent->current_step_id + 1 < agent->path_length)
-            leave_cell(grid, agent);
+        // Enter cell of current step
+        enter_cell(agent, get_cell(agent->grid, current_step.position));
+        DEBUG_LOG("%d:\t entered (%d, %d)\n", agent->id, current_step.position.x, current_step.position.y);
+
+        // Leave cell of previous step
+        leave_cell(agent, get_cell(agent->grid, previous_step.position));
+        DEBUG_LOG("%d:\t left (%d, %d)\n", agent->id, previous_step.position.x, previous_step.position.y);
+
+        passa_tempo(agent->id, current_step.sleep_time);
 
         DEBUG_LOG("%d: finished %d\n", agent->id, agent->current_step_id);
         agent->current_step_id++;

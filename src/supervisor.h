@@ -13,7 +13,7 @@ void print_agents(supervisor_t *supervisor);
 void init_agents(supervisor_t *supervisor);
 void terminate_agents(supervisor_t *supervisor);
 void *agent_run(void *arguments);
-void enter_cell(grid_t *grid, agent_t *agent);
-void leave_cell(grid_t *grid, agent_t *agent);
+void enter_cell(agent_t *agent, cell_t *cell_to_enter);
+void leave_cell(agent_t *agent, cell_t *cell_to_leave);
 
 #endif

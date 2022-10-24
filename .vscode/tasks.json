@@ -5,6 +5,7 @@
             "label": "Build Debug",
             "command": "make",
             "args": [
+                "clean-objects",
                 "debug"
             ],
             "options": {

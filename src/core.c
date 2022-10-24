@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <error.h>
 
+#ifdef DEBUG
 void debug_timestamp()
 {
     struct timespec ts;
@@ -33,9 +34,10 @@ void debug_timestamp()
         exit(-1);
     }
 
-    char time_str[sizeof("1900-01-01 23:59:59")];
+    char time_str[sizeof("23:59:59")];
     time_str[strftime(time_str, sizeof(time_str),
-                      "%Y-%m-%d %H:%M:%S", ptm)] = '\0';
+                      "%H:%M:%S", ptm)] = '\0';
 
     printf("[%s.%03li][DEBUG] ", time_str, msec);
 }
+#endif

@@ -12,23 +12,27 @@
 #include "grid.h"
 #include "supervisor.h"
 
+#ifdef DEBUG
+#define DEBUG_GRID(g) print_grid(g);
+#else
+#define DEBUG_GRID(g)
+#endif
+
 int main(int argc, char const *argv[])
 {
     grid_t grid;
     supervisor_t supervisor;
 
-    input_processing("tests/test.txt", &grid, &supervisor);
+    input_processing("tests/test3.txt", &grid, &supervisor);
 
-    time_t start = time(NULL);
     init_grid(&grid);
     init_agents(&supervisor);
-    print_grid(grid);
+    DEBUG_GRID(grid);
 
     terminate_agents(&supervisor);
+    DEBUG_GRID(grid);
 
-    print_grid(grid);
     terminate_grid(&grid);
-    DEBUG_LOG("Finished in %fs\n", (float)(time(NULL) - start));
 
     return 0;
 }

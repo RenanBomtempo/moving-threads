@@ -8,7 +8,9 @@
         "core.h": "c",
         "agent.h": "c",
         "position.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "pthread.h": "c",
+        "assert.h": "c"
     },
     "makefile.launchConfigurations": [
         {
