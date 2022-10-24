@@ -2,7 +2,10 @@
 #define CORE_H
 
 #ifdef DEBUG
-#define DEBUG_LOG(...) printf(__VA_ARGS__);
+void debug_timestamp();
+#define DEBUG_LOG(...) \
+    debug_timestamp(); \
+    printf(__VA_ARGS__);
 #else
 #define DEBUG_LOG(...)
 #endif
