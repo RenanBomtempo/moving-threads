@@ -9,6 +9,8 @@ typedef struct supervisor_t
     agent_t *agents;
 } supervisor_t;
 
-void print_agents(supervisor_t *s);
+void print_agents(supervisor_t *supervisor);
+void init_agents(supervisor_t *supervisor);
+void terminate_agents(supervisor_t *supervisor);
 
 #endif

@@ -19,5 +19,10 @@ int main(int argc, char const *argv[])
 
     input_processing("tests/test.txt", &grid, &supervisor);
 
+    init_grid(&grid);
+    init_agents(&supervisor);
+
+    terminate_agents(&supervisor);
+
     return 0;
 }

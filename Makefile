@@ -1,7 +1,7 @@
 CC = gcc
 SRC_FILES =  $(filter-out src/main.c, $(wildcard  src/*.c))
 OBJ_FILES =  $(SRC_FILES:.c=.o)
-CCFLAGS = 
+CCFLAGS = -pthread
 DEBUG_OUT = ex1-debug
 RELEASE_OUT = ex1
 

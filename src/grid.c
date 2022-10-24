@@ -1,17 +1,11 @@
 #include "grid.h"
 
-void initialize_grid(grid_t *grid, int length)
-{
-    grid->length = length;
-}
-
 void move(grid_t *grid, position_t from, position_t to)
 {
 }
 
 void print_grid(grid_t *grid)
 {
-#ifdef DEBUG
     printf("Grid length: %d\n", grid->length);
     printf("Grid positions:\n");
     for (int i = 0; i < grid->length; i++)
@@ -22,5 +16,16 @@ void print_grid(grid_t *grid)
         }
         printf("|\n");
     }
-#endif
+}
+
+void init_grid(grid_t *grid)
+{
+    grid->size = grid->length * grid->length;
+    for (int i = 0; i < grid->size; i++)
+        grid->cells[i] = -1;
+}
+
+void set_cell_value(grid_t *grid, position_t pos, int value)
+{
+    grid->cells[calculate_position_index(pos)] = value;
 }

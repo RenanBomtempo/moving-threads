@@ -18,8 +18,12 @@ FILE *open_file(const char *filename, const char *mode)
 void close_file(FILE *file)
 {
     fclose(file);
+    DEBUG_LOG("File closed successfuly!\n");
 }
 
+
+/* Read the input file and store data in grid and supervisor data structures.
+*/
 void input_processing(const char *filename, grid_t *grid, supervisor_t *supervisor)
 {
     // Process input and initialize data structures
@@ -27,7 +31,6 @@ void input_processing(const char *filename, grid_t *grid, supervisor_t *supervis
 
     // Get grid size and number of agents
     fscanf(input_file, "%d %d", &grid->length, &supervisor->num_agents);
-    print_grid(grid);
 
     // Read agents data
     supervisor->agents = (agent_t *)malloc(supervisor->num_agents * sizeof(agent_t));
@@ -41,8 +44,10 @@ void input_processing(const char *filename, grid_t *grid, supervisor_t *supervis
             fscanf(input_file, "%d %d %d", &step.position.x, &step.position.y, &step.sleep_time);
             agent->path[j] = step;
         }
+        agent->current_step = 0;
+        agent->grid = grid;
+        grid->cells[calculate_position_index(agent->path[0].position)] = agent->id;
     }
-    print_agents(supervisor);
 
     close_file(input_file);
 }
