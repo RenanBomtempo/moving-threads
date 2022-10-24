@@ -21,8 +21,11 @@ int main(int argc, char const *argv[])
 
     init_grid(&grid);
     init_agents(&supervisor);
+    print_grid(grid);
 
     terminate_agents(&supervisor);
+    print_grid(grid);
+    terminate_grid(&grid);
 
     return 0;
 }

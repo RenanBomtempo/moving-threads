@@ -1,6 +1,9 @@
 #include "position.h"
 
-int calculate_position_index(position_t p)
+position_t out_of_grid_position()
 {
-    return p.x * p.y;
+    position_t p;
+    p.x = -1;
+    p.y = -1;
+    return p;
 }

@@ -18,12 +18,3 @@ void print_agent(agent_t agent)
     for (int i = 0; i < agent.path_length; i++)
         printf("\t\t(%d, %d, %d s)\n", agent.path[i].position.x, agent.path[i].position.y, agent.path[i].sleep_time);
 }
-
-// This is the funtion that wil be running on each thread
-void *agent_run(void *arguments)
-{
-    agent_t *agent = (agent_t *)arguments;
-    DEBUG_LOG("Agent %d started succesfully!\n", agent->id);
-    passa_tempo(agent->id, agent->path[0].sleep_time);
-    DEBUG_LOG("Agent %d finished succesfully!\n", agent->id);
-}

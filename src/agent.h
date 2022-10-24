@@ -20,7 +20,7 @@ typedef struct agent_t
     int id;
     int group_id;
     int path_length;
-    int current_step;
+    int current_step_id;
     pthread_t thread;
     position_t position;
     step_t path[MAX_PATH_LENGTH];
@@ -28,9 +28,6 @@ typedef struct agent_t
 } agent_t;
 
 void print_agent(agent_t a);
-
 void passa_tempo(int tid, int decimos);
-
-void *agent_run(void *arguments);
 
 #endif

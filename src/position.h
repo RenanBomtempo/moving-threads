@@ -7,6 +7,6 @@ typedef struct position_t
     int y;
 } position_t;
 
-int calculate_position_index(position_t p);
+position_t out_of_grid_position();
 
 #endif
