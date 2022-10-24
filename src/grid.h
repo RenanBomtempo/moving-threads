@@ -11,6 +11,9 @@ typedef struct cell_t
 {
     int group_id;    // ID of the agent's group
     int agent_count; // Number of agents in the cell
+    pthread_mutex_t mutex;
+    pthread_cond_t occupied;
+    pthread_cond_t empty;
 } cell_t;
 
 typedef struct grid_t

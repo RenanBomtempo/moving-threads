@@ -24,6 +24,9 @@ void init_grid(grid_t *grid)
         cell_t *cell = grid->cells + i;
         cell->group_id = -1;
         cell->agent_count = 0;
+        assert(!pthread_mutex_init(&(cell->mutex), NULL));
+        assert(!pthread_cond_init(&(cell->occupied), NULL));
+        assert(!pthread_cond_init(&(cell->empty), NULL));
     }
 }
 
@@ -37,5 +40,8 @@ void terminate_grid(grid_t *grid)
     for (int i = 0; i < grid->size; i++)
     {
         cell_t *cell = grid->cells + i;
+        pthread_mutex_destroy(&(cell->mutex));
+        pthread_cond_destroy(&(cell->occupied));
+        pthread_cond_destroy(&(cell->empty));
     }
 }

@@ -19,13 +19,16 @@ int main(int argc, char const *argv[])
 
     input_processing("tests/test.txt", &grid, &supervisor);
 
+    time_t start = time(NULL);
     init_grid(&grid);
     init_agents(&supervisor);
     print_grid(grid);
 
     terminate_agents(&supervisor);
+
     print_grid(grid);
     terminate_grid(&grid);
+    DEBUG_LOG("Finished in %fs\n", (float)(time(NULL) - start));
 
     return 0;
 }
