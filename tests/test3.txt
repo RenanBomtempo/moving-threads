@@ -15,10 +15,3 @@
     1 2 10
     1 1 10
     1 0 10
-
-(4)->grid.length (4)->supervisor.num_agents
-
-(1)->supervisor.agents[0].id (1)->supervisor.agents[0].id (3)->supervisor.agents[0].path_length
-	(0)->supervisor.agents[0].path[0].position.x (1)->supervisor.agents[0].path[0].position.y (10)->supervisor.agents[0].path[0].sleep_time
-	(1)->supervisor.agents[0].path[1].position.x (1)->supervisor.agents[0].path[1].position.y (10)->supervisor.agents[0].path[1].sleep_time
-	(2)->supervisor.agents[0].path[2].position.x (1)->supervisor.agents[0].path[2].position.y (10)->supervisor.agents[0].path[2].sleep_time
