@@ -1,4 +1,4 @@
-## Introdução
+### Introdução
 
 Neste trabalho vamos implementar um sistema de sincronização entre threads que se assemelha a um sistema de controle de movimentação para um jogo digital, ou para o controle de robôs.
 
@@ -13,6 +13,7 @@ A especificação do tabuleiro, do número de threads e dos seus trajetos será 
 O tempo mínimo a ser gasto em cada posição será fornecido em décimos de segundo; ao se estabelecer em uma certa posição, a thread deve executar a função **passa_tempo()** que deve ser definida exatamente como a seguir:
 
 ```
+-------------
 #include <time.h>
 
 void passa_tempo(int tid, int decimos)
@@ -26,6 +27,8 @@ void passa_tempo(int tid, int decimos)
     nanosleep(&zzz,NULL);
     printf("PTb(%d,%d)\n",tid,decimos);
 }
+-------------
+
 ```
 
 O código apresentado para a função passa_tempo fará com que a thread seja suspensa pelo tempo indicado. Para todos os efeitos de sincronização, seria o mesmo que se ela estivesse executando qualquer tipo de operação computacionalmente intensiva, porém sem ocupar a CPU durante esse período.
